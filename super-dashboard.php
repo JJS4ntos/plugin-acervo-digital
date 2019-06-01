@@ -9,3 +9,5 @@
 */
 define('SD_PATH', plugin_dir_url( __FILE__ ));
 require_once 'config/setup.php';
+require_once 'autoload.php';
+require_once 'routes.php';
