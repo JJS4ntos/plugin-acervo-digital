@@ -1,5 +1,7 @@
 <?php
 
+namespace Entities;
+
 class Lead {
 
   private $name, $email;

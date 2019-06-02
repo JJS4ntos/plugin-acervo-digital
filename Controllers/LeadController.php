@@ -1,10 +1,11 @@
 <?php
+
 namespace Controllers;
 
 class LeadController {
 
   public function add(){
-    echo 'Olá mundo!';
+    return json_encode(['Nitinha' => 'Top']);
   }
 
 }

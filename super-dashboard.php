@@ -7,6 +7,11 @@
   Author: Jair Júnior
   Author URI: https://github.com/JJS4ntos
 */
+// If this file is accessed directory, then abort.
+if ( ! defined( 'WPINC' ) ) {
+    die;
+}
+
 define('SD_PATH', plugin_dir_url( __FILE__ ));
 require_once 'config/setup.php';
 require_once 'autoload.php';

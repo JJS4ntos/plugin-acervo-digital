@@ -14,17 +14,17 @@ class RouterController {
 
   /*
     Retornaa funcção correspondente ao callback indicado seguindo o formato:
-    function@controller
+    controller@function
   */
   private function resolveCallback(String $url, String $callback, String $method){
     try {
       $meta = explode('@', $callback);
-      $class = 'Controllers\\'.$meta[1];
+      $class = 'Controllers\\'.$meta[0];
       $controller = new $class();
-      add_action('admin_menu', function() use($controller, $meta, $method, $url){
+      add_action('rest_api_init', function() use($controller, $meta, $method, $url){
         register_rest_route(URL_SCOPE, $url, [
           'methods' => $method,
-          'callback' => call_user_func( array( $controller, $meta[0] ) )
+          'callback' => function()use($controller, $meta){return $controller->{$meta[1]}();}
         ]);
       });
     } catch (Exception $e) {

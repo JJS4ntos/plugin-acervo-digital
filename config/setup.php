@@ -13,5 +13,6 @@ function super_dashboard_page_setup(){
 }
 
 function page_resource(){
-  echo file_get_contents( SD_PATH . 'frontend/dist/index.html' );
+  //echo file_get_contents( SD_PATH . 'frontend/dist/index.html' );
+  echo '<h1>Esta página será substituída</h1>';
 }
