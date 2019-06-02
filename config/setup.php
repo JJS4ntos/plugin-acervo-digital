@@ -1,11 +1,14 @@
 <?php
 
+//Set te base url to access endpoints
 define('URL_SCOPE', 'sd-api/v1');
 
+//Setup vue js to use with frontend
 add_action('admin_enqueue_scripts', function(){
   wp_enqueue_script( 'sd-view', SD_PATH . 'views/libs/vue.js' );
 });
 
+//Setup page on admin menu
 add_action('admin_menu', 'super_dashboard_page_setup');
 
 function super_dashboard_page_setup(){
