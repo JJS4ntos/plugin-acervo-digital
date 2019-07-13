@@ -11,20 +11,7 @@ $prefix = "{$wpdb->prefix}sd_";
 /**
  * Structure of tables that will be created.
  */
-$tables = array(
-    'leads' => "CREATE TABLE {$prefix}leads (
-                    id mediumint(9) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                    name varchar(100) NOT NULL,
-                    email varchar(100) NOT NULL
-                ) $charset_collate;",
-    'leads_data' => "CREATE TABLE {$prefix}leads_data (
-                        id mediumint(9) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        lead_id mediumint(9) NOT NULL,
-                        name varchar(100) NOT NULL,
-                        value varchar(100) NOT NULL,
-                        FOREIGN KEY (lead_id) REFERENCES {$prefix}leads(id)
-                    ) $charset_collate;"
-);
+$tables = array();
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
