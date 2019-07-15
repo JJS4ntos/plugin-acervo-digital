@@ -13,6 +13,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define('SD_PATH', plugin_dir_url( __FILE__ ));
+define('SD_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 require_once 'config/setup.php';
 require_once 'database/install.php';
 require_once 'autoload.php';

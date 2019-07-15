@@ -1,7 +1,9 @@
 <?php
 
+require_once 'post_types.php';
+
 //Set te base url to access endpoints
-define('URL_SCOPE', 'sd-api/v1');
+define('URL_SCOPE', 'acervo-api');
 
 //Setup vue js to use with frontend
 add_action('admin_enqueue_scripts', function(){
@@ -16,6 +18,5 @@ function super_dashboard_page_setup(){
 }
 
 function page_resource(){
-  //echo file_get_contents( SD_PATH . 'frontend/dist/index.html' );
-  echo '<h1>Esta página será substituída</h1>';
+  echo file_get_contents( SD_PATH . 'frontend/index.php' );
 }
