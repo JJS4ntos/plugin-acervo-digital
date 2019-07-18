@@ -4,7 +4,7 @@
  */
 
 use Controllers\RouterController;
-use ShortCodes\Register;
+use Shortcodes\Register;
 
 $register = new Register();
 

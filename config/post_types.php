@@ -7,6 +7,12 @@
         'menu_icon' => 'dashicons-book',
       )
     );
+    register_post_type( 'favorito', array(
+        'public'    => false,
+        'label'     => __('Favoritos', 'textdomain'),
+        'menu_icon' => 'dashicons-book',
+      )
+    );
   }
 
   function after_solicitacao_saved($meta_id, $post_id, $meta_key='', $meta_value=''){

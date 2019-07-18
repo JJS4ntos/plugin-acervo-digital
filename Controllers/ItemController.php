@@ -12,15 +12,17 @@ class ItemController extends Controller{
   public function load( $atts = null ) {
     $itemModel = new Item();
     $items = $itemModel->getItems();
+    $result = '';
     foreach( $items as $item ) {
-      $this->build( $item );
+      $result .= $this->build( $item );
     }
+    return $result;
   }
 
   public function build( $item ) {
     $livro = get_page_by_title('Livro');
     $link = get_page_link( $livro->ID );
-    $this->generateView( 'frontend/items', array('link' => $link, 'item' => $item) );
+    return $this->generateView( 'frontend/items', array('link' => $link, 'item' => $item) );
   }
 
   public function view() {
@@ -33,7 +35,7 @@ class ItemController extends Controller{
 
   public function getUploadImage( $item ) {
     $uploads = json_decode( $item->uploads )->images;
-    $image = 'http://localhost/acervo/wp-content/uploads/2019/07/placeholder-600x400.png';
+    $image = 'http://memoriafredericomorais.com.br/acervo/wp-content/uploads/2019/07/placeholder-600x400.png';
     if(is_array($uploads)) {
       foreach ($uploads as $key => $upload) {
         if($key == 0) {
@@ -59,7 +61,7 @@ class ItemController extends Controller{
   }
 
   public function getRelationItems( $item ){
-    $result = json_decode( file_get_contents('http://localhost/AppGini/api/item.php?t=123&serieId=' . $item->serie_codigo) );
+    $result = json_decode( file_get_contents('http://memoriafredericomorais.com.br/api/item.php?t=123&serieId=' . $item->serie_codigo) );
     return $result;
   }
 

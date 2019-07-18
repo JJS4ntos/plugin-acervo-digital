@@ -2,8 +2,6 @@
   namespace Shortcodes;
 
   use Shortcodes\Names;
-  //use Controllers\ItemController;
-
 
   /*
   *   Register shortcode and link to function in controller;
