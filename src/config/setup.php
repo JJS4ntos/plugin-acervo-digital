@@ -14,7 +14,7 @@ add_action('admin_enqueue_scripts', function(){
 add_action('admin_menu', 'super_dashboard_page_setup');
 
 function super_dashboard_page_setup(){
-  add_menu_page( 'Acervo Digital', 'Acervo Digital', 'manage_options', 'super-dashboard', 'page_resource', 'dashicons-image-filter', 3 );
+  add_menu_page( 'Acervo Digital', 'Acervo Digital', 'manage_options', 'acervo-digital', 'page_resource', 'dashicons-image-filter', 3 );
 }
 
 function page_resource(){

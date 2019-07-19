@@ -1,5 +1,5 @@
 <?php
-  namespace Shortcodes;
+  namespace App\Shortcodes;
 
   trait Names {
 

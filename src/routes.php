@@ -2,9 +2,10 @@
 /**
  * Route controllers to execute functions according urls.
  */
+namespace App;
 
-use Controllers\RouterController;
-use Shortcodes\Register;
+use App\Controllers\RouterController;
+use App\Shortcodes\Register;
 
 $register = new Register();
 

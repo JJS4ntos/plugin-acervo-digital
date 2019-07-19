@@ -1,7 +1,7 @@
 <?php
-  namespace Shortcodes;
+  namespace App\Shortcodes;
 
-  use Shortcodes\Names;
+  use App\Shortcodes\Names;
 
   /*
   *   Register shortcode and link to function in controller;
@@ -18,7 +18,7 @@
 
     public function install($name, $function) {
       $meta = explode('@', $function);
-      $class = 'Controllers\\'.$meta[0];
+      $class = 'App\\Controllers\\'.$meta[0];
       add_shortcode( $name, array( new $class, $meta[1] ) );
     }
 

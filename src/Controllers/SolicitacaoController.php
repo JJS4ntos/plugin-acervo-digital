@@ -1,7 +1,7 @@
 <?php
-namespace Controllers;
+namespace App\Controllers;
 
-use Model\Item;
+use App\Model\Item;
 
 class SolicitacaoController {
 
