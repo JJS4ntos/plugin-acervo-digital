@@ -23,7 +23,7 @@ class ItemController extends Controller{
     $livro = get_page_by_title('Livro');
     $link = get_page_link( $livro->ID );
     $itemModel = new Item();
-    return $this->generateView( 'items', array('link' => $link, 'items' => $items, 'thumbnail' => $itemModel->getUploadImage( $item )) );
+    return $this->generateView( 'items', array('link' => $link, 'item' => $item, 'thumbnail' => $itemModel->getUploadImage( $item )) );
   }
 
   public function view() {

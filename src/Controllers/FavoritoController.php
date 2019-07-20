@@ -6,7 +6,7 @@ use App\Controllers\Controller;
 class FavoritoController extends Controller {
 
   public function meusFavoritos( $atts = false ) {
-    return $this->generateView('download-file', array());
+    return $this->generateView('meus-favoritos', array());
   }
 
 }

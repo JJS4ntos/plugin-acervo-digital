@@ -14,6 +14,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 define('SD_PATH', plugin_dir_url( __FILE__ ));
 define('SD_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
+
 require_once 'src/config/setup.php';
 require_once 'src/database/install.php';
 require_once 'vendor/autoload.php';

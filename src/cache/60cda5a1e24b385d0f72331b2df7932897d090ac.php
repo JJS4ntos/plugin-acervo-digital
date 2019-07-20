@@ -12,58 +12,6 @@
   );
   $url = get_bloginfo('url');
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#solicitar-acesso').click(function(){
-      $.ajax({
-        url: '<?php echo e($url); ?>' + '/wp-json/acervo-api/solicitar-acesso',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-          itemId: '<?php echo e($_GET['id']); ?>',
-          userId: <?php echo e(get_current_user_id()); ?>
-
-        },
-        beforeSend: function( jqXHR, settings ) {
-          $('#solicitar-acesso').html('Solicitando...');
-        },
-        complete: function() {
-          alert('Solicitação enviada com sucesso! Aguarde a aprovação do administrador, você receberá um e-mail quando isto acontecer.');
-          $('#solicitar-acesso').html('Acesso solicitado');
-          $('#solicitar-acesso').attr('disabled', 'true');
-        }
-      });
-    });
-  })
-</script>
-<style media="screen">
-  .properties li {
-    font-size: 17px;
-    font-weight: bold;
-    color: black;
-    margin-top: 5px;
-  }
-
-  .properties {
-    list-style: none;
-    margin: 0;
-    margin-bottom: 30px;
-  }
-
-  .propertyTitle {
-    color: gray;
-  }
-
-  .acervo-title {
-    margin-bottom: 22px;
-  }
-
-  .social-share-bar {
-    display:none !important;
-  }
-
-</style>
 <div class="container">
   <div class="row">
     <div class="col-md-6 acervo-title">
