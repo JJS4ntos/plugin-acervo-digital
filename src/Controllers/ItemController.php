@@ -11,12 +11,15 @@ class ItemController extends Controller{
   */
   public function load( $atts = null ) {
     $itemModel = new Item();
-    $items = $itemModel->getItems();
+    $page = $_GET['l'];
+    $items = $itemModel->getItems($page);
     $result = '';
+    $pages = $itemModel->getTotalItems()[0]->total / 10;
+    $pagination = $this->generateView( 'pagination', array('pages' => $pages) );
     foreach( $items as $item ) {
       $result .= $this->build( $item );
     }
-    return $result;
+    return $result . $pagination;
   }
 
   public function build( $item ) {
@@ -31,7 +34,23 @@ class ItemController extends Controller{
     if( isset( $_GET['id'] ) ) {
         $item = $itemModel->getItem($_GET['id'])[0];
         $images = $itemModel->getUploadImages($item);
-        return $this->generateView('single-item', array('item' => $item, 'images' => $images, 'itemModel' => $itemModel) );
+        $favorito = get_posts(
+          array(
+             'numberposts'	=> -1,
+             'post_status' => 'private',
+             'post_type'		=> 'favorito',
+             'meta_key'		=> 'item_id',
+             'meta_value'	=> $_GET['id']
+          )
+        );
+        return $this->generateView('single-item', array(
+            'item' => $item,
+            'images' => $images,
+            'itemModel' => $itemModel,
+            'userId' => get_current_user_id(),
+            'favorito' => $favorito
+          )
+        );
     }
   }
 

@@ -1,7 +1,3 @@
-<style media="screen">
-
-
-</style>
 <div class="list-item blog-list-item format-standard post-29 artwork type-artwork status-publish has-post-thumbnail hentry">
   <div class='row item'>
     <div class="col-md-4 text-center">
@@ -10,14 +6,12 @@
     </div>
     <div class='col-md-6'>
       <h3><a href='{{ $link }}?id={{$item->id}}'>{{$item->titulo}}</a></h3>
-
       <div class="meta-data alt">
         @if($item->autoria !== null)
           <div>Por {{ $item->autoria }}</div>
         @else
           <div>Autor desconhecido</div>
         @endif
-
       </div>
       <ul>
         <li>Dimensão: {{ $item->dimensao }}</li>

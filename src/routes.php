@@ -12,3 +12,5 @@ $register = new Register();
 $router = new RouterController();
 $router->post('/solicitar-acesso', 'SolicitacaoController@solicitarAcesso');
 $router->post('/solicitar-download', 'SolicitacaoController@solicitarDownload');
+$router->post('/favoritar-item', 'FavoritoController@favoritar');
+$router->post('/desfavoritar-item', 'FavoritoController@desfavoritar');

@@ -12,6 +12,9 @@
   );
   $url = get_bloginfo('url');
 ?>
+<script type="text/javascript">
+  root = '<?php echo e(get_bloginfo('url')); ?>';
+</script>
 <div class="container">
   <div class="row">
     <div class="col-md-6 acervo-title">
@@ -79,7 +82,15 @@
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       </ul>
       <p class="post-content">
-        <button id="solicitar-acesso" type="button" class="btn btn-primary">Solicitar acesso</button>
+        <?php if( count( $favorito ) > 0 ): ?>
+          <button type="button" id="desfavoritar" favorito="<?php echo e($favorito[0]->ID); ?>" class="btn btn-primary">
+            <i class="fa fa-star"></i> Remover de favorito
+          </button>
+        <?php else: ?>
+          <button type="button" id="favoritar" item="<?php echo e($item->id); ?>" user="<?php echo e($userId); ?>" class="btn btn-primary">
+            <i class="fa fa-star"></i> Favoritar
+          </button>
+        <?php endif; ?>
       </p>
       <div class="accordion" id="artist-accordion">
           <div class="accordion-group panel">
@@ -88,16 +99,16 @@
                   <div class="accordion-inner">
                     <div class="row">
                       <?php $__currentLoopData = $itemModel->getRelationItems($item); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                              <div class="col-md-6">
-                                <a href="<?php echo e(get_page_link(get_queried_object()->ID) . '?id=' . $item->id); ?>">
-                                  <img src="<?php echo e($itemModel->getUploadImage($item)); ?>">
-                                  <?php if($item->autoria !== null): ?>
-                                    <div>Por <?php echo e($item->autoria); ?></div>
-                                  <?php else: ?>
-                                    <div>Autor desconhecido</div>
-                                  <?php endif; ?>
-                                </a>
-                              </div>
+                        <div class="col-md-6">
+                          <a href="<?php echo e(get_page_link(get_queried_object()->ID) . '?id=' . $item->id); ?>">
+                            <img src="<?php echo e($itemModel->getUploadImage($item)); ?>">
+                            <?php if($item->autoria !== null): ?>
+                              <div>Por <?php echo e($item->autoria); ?></div>
+                            <?php else: ?>
+                              <div>Autor desconhecido</div>
+                            <?php endif; ?>
+                          </a>
+                        </div>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                   </div>

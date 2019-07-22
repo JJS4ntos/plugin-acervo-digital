@@ -8,7 +8,7 @@
       )
     );
     register_post_type( 'favorito', array(
-        'public'    => false,
+        'public'    => true,
         'label'     => __('Favoritos', 'textdomain'),
         'menu_icon' => 'dashicons-book',
       )

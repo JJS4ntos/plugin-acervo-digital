@@ -12,6 +12,9 @@
   );
   $url = get_bloginfo('url');
 @endphp
+<script type="text/javascript">
+  root = '{{ get_bloginfo('url') }}';
+</script>
 <div class="container">
   <div class="row">
     <div class="col-md-6 acervo-title">
@@ -78,7 +81,15 @@
         @endforeach
       </ul>
       <p class="post-content">
-        <button id="solicitar-acesso" type="button" class="btn btn-primary">Solicitar acesso</button>
+        @if( count( $favorito ) > 0 )
+          <button type="button" id="desfavoritar" favorito="{{ $favorito[0]->ID }}" class="btn btn-primary">
+            <i class="fa fa-star"></i> Remover de favorito
+          </button>
+        @else
+          <button type="button" id="favoritar" item="{{ $item->id }}" user="{{ $userId }}" class="btn btn-primary">
+            <i class="fa fa-star"></i> Favoritar
+          </button>
+        @endif
       </p>
       <div class="accordion" id="artist-accordion">
           <div class="accordion-group panel">
@@ -87,16 +98,16 @@
                   <div class="accordion-inner">
                     <div class="row">
                       @foreach ($itemModel->getRelationItems($item) as $item)
-                              <div class="col-md-6">
-                                <a href="{{ get_page_link(get_queried_object()->ID) . '?id=' . $item->id }}">
-                                  <img src="{{ $itemModel->getUploadImage($item) }}">
-                                  @if($item->autoria !== null)
-                                    <div>Por {{ $item->autoria }}</div>
-                                  @else
-                                    <div>Autor desconhecido</div>
-                                  @endif
-                                </a>
-                              </div>
+                        <div class="col-md-6">
+                          <a href="{{ get_page_link(get_queried_object()->ID) . '?id=' . $item->id }}">
+                            <img src="{{ $itemModel->getUploadImage($item) }}">
+                            @if($item->autoria !== null)
+                              <div>Por {{ $item->autoria }}</div>
+                            @else
+                              <div>Autor desconhecido</div>
+                            @endif
+                          </a>
+                        </div>
                       @endforeach
                     </div>
                   </div>
