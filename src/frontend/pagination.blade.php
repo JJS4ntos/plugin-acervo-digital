@@ -6,7 +6,12 @@
     });
   });
 </script>
-
+@php
+  $page = 1;
+  if( isset($_GET['l']) ) {
+    $page = $_GET['l'];
+  }
+@endphp
 <form id="pagination">
   <input type="hidden" name="r" value="10">
   <input type="hidden" name="l" id="page_url">
@@ -14,6 +19,6 @@
 
 <select class="form-control" id="page">
   @for( $i=1; $i < $pages; $i++ )
-    <option value="{{ $i }}" {{ $_GET['l'] == $i? 'selected':'' }}>Página {{ $i }}</option>
+    <option value="{{ $i }}" {{ $page == $i? 'selected':'' }}>Página {{ $i }}</option>
   @endfor
 </select>
