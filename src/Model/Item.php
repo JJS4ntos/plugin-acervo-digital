@@ -56,7 +56,10 @@ class Item {
     }
 
     public function getUploadImages( $item ) {
-      $uploads = json_decode( $item->uploads )->images;
+      $uploads = '';
+      if( isset($item->uploads) ) {
+        $uploads = json_decode( $item->uploads )->images;
+      }
       $images = array();
       if(is_array($uploads)) {
         foreach ($uploads as $upload) {
