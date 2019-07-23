@@ -14,6 +14,6 @@
 
 <select class="form-control" id="page">
   @for( $i=1; $i < $pages; $i++ )
-    <option value="{{ $i }}">Página {{ $i }}</option>
+    <option value="{{ $i }}" {{ $_GET['l'] == $i? 'selected':'' }}>Página {{ $i }}</option>
   @endfor
 </select>
