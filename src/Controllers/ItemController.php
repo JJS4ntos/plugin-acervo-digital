@@ -11,7 +11,10 @@ class ItemController extends Controller{
   */
   public function load( $atts = null ) {
     $itemModel = new Item();
-    $page = $_GET['l'];
+    $page = 1;
+    if( isset($_GET['l']) ) {
+      $page = $_GET['l'];
+    }
     $items = $itemModel->getItems($page);
     $result = '';
     $pages = $itemModel->getTotalItems()[0]->total / 10;

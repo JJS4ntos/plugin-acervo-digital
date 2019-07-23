@@ -37,7 +37,10 @@ class Item {
     }
 
     public function getUploadImage( $item ) {
-      $uploads = json_decode( $item->uploads )->images;
+      $uploads = '';
+      if( isset($item->uploads) ) {
+        $uploads = json_decode( $item->uploads )->images;
+      }
       $image = 'http://memoriafredericomorais.com.br/acervo/wp-content/uploads/2019/07/placeholder-600x400.png';
       if(is_array($uploads)) {
         foreach ($uploads as $key => $upload) {
