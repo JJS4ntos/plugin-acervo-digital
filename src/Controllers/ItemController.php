@@ -22,6 +22,11 @@ class ItemController extends Controller{
     return $result . $pagination;
   }
 
+
+  public function filtro( $atts = null ) {
+    return $this->generateView('filtro', array());
+  }
+
   public function build( $item ) {
     $livro = get_page_by_title('Livro');
     $link = get_page_link( $livro->ID );

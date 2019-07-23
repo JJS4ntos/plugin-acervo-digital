@@ -7,7 +7,8 @@
         'items' => 'ItemController@load',
         'item_single' => 'ItemController@view',
         'download_item' => 'ItemController@download',
-        'meus-favoritos' => 'FavoritoController@meusFavoritos'
+        'meus-favoritos' => 'FavoritoController@meusFavoritos',
+        'filtro' => 'ItemController@filtro'
     ];
 
   }
