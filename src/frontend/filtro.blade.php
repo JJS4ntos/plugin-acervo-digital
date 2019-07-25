@@ -7,6 +7,9 @@
     <div class="col-md-3">
       <select class="form-control" name="colecao" id="colecao">
         <option value="">Selecione a coleção...</option>
+        @foreach( $colecoes as $colecao )
+          <option value="{{ $colecao->id }}">{{ $colecao->colecao }}</option>
+        @endforeach
       </select>
     </div>
     <div class="col-md-3">
@@ -22,9 +25,7 @@
   </div>
   <div class="row justify-content-end">
     <div class="col-md-3">
-      <form>
         <button type="submit" class="btn btn-primary">Buscar</button>
-      </form>
     </div>
   </div>
 </form>

@@ -27,7 +27,9 @@ class ItemController extends Controller{
 
 
   public function filtro( $atts = null ) {
-    return $this->generateView('filtro', array());
+    $itemModel = new Item();
+    $colecoes = $itemModel->getColecao();
+    return $this->generateView('filtro', array('colecoes' => $colecoes));
   }
 
   public function build( $item ) {
