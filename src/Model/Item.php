@@ -6,6 +6,10 @@ class Item {
     private $host= 'memoriafredericomorais.com.br';
     //private $host= 'localhost/AppGini';
 
+    public function getHost() {
+      return $this->host;
+    }
+
     public function getItems($page = false) {
       $result = '';
       if( $page ) {
@@ -27,12 +31,12 @@ class Item {
     }
 
     public function getColecao($id) {
-      $result = json_decode( file_get_contents('http://'. $this->host .'/api/collection.php?t=123&colecaoId='.$id) );
+      $result = json_decode( file_get_contents('http://'. $this->host .'/api/collection.php?t=123&colecaoId='. $id .'&page=1&rows=1000') );
       return $result;
     }
 
     public function getGrupo($id) {
-      $result = json_decode( file_get_contents('http://'. $this->host .'/api/group.php?t=123&groupId='.$id) );
+      $result = json_decode( file_get_contents('http://'. $this->host .'/api/group.php?t=123&groupId='. $id .'&page=1&rows=1000') );
       return $result;
     }
 
@@ -70,7 +74,7 @@ class Item {
     }
 
     public function getRelationItems( $item ){
-      $result = json_decode( file_get_contents('http://'. $this->host .'/api/item.php?t=123&serieId=' . $item->serie_codigo) );
+      $result = json_decode( file_get_contents('http://'. $this->host .'/api/item.php?t=123&serieId=' . $item->serie_codigo . '&page=1&rows=4') );
       return $result;
     }
 

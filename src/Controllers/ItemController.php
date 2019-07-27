@@ -41,6 +41,25 @@ class ItemController extends Controller{
     $itemModel = new Item();
     if( isset( $_GET['id'] ) ) {
         $item = $itemModel->getItem($_GET['id'])[0];
+        $identificacao = $item->identificacao;
+        $result = json_decode( file_get_contents('http://'. $itemModel->getHost() .'/api/item.php?t=123&identificacao=' . $identificacao) );
+        $uploads = false;
+        if( isset($result->uploads) ) {
+            $uploads = json_decode($result->uploads);
+            $uploads = $uploads->images;
+        }
+        $links = array();
+        if( $uploads ) {
+          foreach( $uploads as $upload ) {
+            $link = 'http://acervofredericomorais.com.br/arquivos/images/upload/'. $upload->fileName;
+            /*header('Content-Type: application/pdf');
+            header("Content-Disposition: attachment; filename={$upload->fileName}.pdf");
+            header('Pragma: no-cache');
+            readfile($link);
+            exit;*/
+            $links[] = $link;
+          }
+        }
         $images = $itemModel->getUploadImages($item);
         $favorito = get_posts(
           array(
@@ -56,7 +75,8 @@ class ItemController extends Controller{
             'images' => $images,
             'itemModel' => $itemModel,
             'userId' => get_current_user_id(),
-            'favorito' => $favorito
+            'favorito' => $favorito,
+            'links' => $links
           )
         );
     }
