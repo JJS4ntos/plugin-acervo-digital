@@ -3,8 +3,8 @@ namespace App\Model;
 
 class Item {
 
-    //private $host= 'memoriafredericomorais.com.br';
-    private $host= 'localhost/AppGini';
+    private $host= 'memoriafredericomorais.com.br';
+    //private $host= 'localhost/AppGini';
     private $except_args = ['l', 'r'];
 
     public function getHost() {
