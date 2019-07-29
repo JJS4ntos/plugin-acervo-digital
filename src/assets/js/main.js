@@ -53,34 +53,34 @@ $(document).ready(function(){
     }
   });
 
-  $('#favoritar').click(function(){
-    $('#favoritar').html('Favoritando...');
-    $('#favoritar').attr('disabled', 'true');
+  $('.favoritar').click(function(){
+    $('.favoritar').html('Favoritando...');
+    $('.favoritar').attr('disabled', 'true');
     $.ajax({
       url: root + '/wp-json/acervo-api/favoritar-item',
       type: 'POST',
       data: {
-        itemId: $('#favoritar').attr('item'),
-        userId: $('#favoritar').attr('user')
+        itemId: $('.favoritar').attr('item'),
+        userId: $('.favoritar').attr('user')
       },
       success: function(data){
-        $('#favoritar').html(data);
+        $('.favoritar').html(data);
       }
     });
 
   });
 
-  $('#desfavoritar').click(function(){
-    $('#desfavoritar').html('Removendo de favoritos...');
-    $('#desfavoritar').attr('disabled', 'true');
+  $('.desfavoritar').click(function(){
+    $('.desfavoritar').html('Removendo de favoritos...');
+    $('.desfavoritar').attr('disabled', 'true');
     $.ajax({
       url: root + '/wp-json/acervo-api/desfavoritar-item',
       type: 'POST',
       data: {
-        favoritoId: $('#desfavoritar').attr('favorito')
+        favoritoId: $('.desfavoritar').attr('favorito')
       },
       success: function(data){
-        $('#desfavoritar').html(data);
+        $('.desfavoritar').html(data);
       }
     });
   });

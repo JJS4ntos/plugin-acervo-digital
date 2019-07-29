@@ -11,13 +11,20 @@ class ItemController extends Controller{
   */
   public function load( $atts = null ) {
     $itemModel = new Item();
-    $page = 1;
+    $page = '';
     if( isset($_GET['l']) ) {
       $page = $_GET['l'];
     }
-    $items = $itemModel->getItems($page);
+    $items = $itemModel->getItems($page, $_GET);
+    $count = $items->count[0]->{'COUNT(*)'};
+    $items = $items->result;
     $result = '';
-    $pages = $itemModel->getTotalItems()[0]->total / 10;
+    $pages = 1;
+    //if( count($items) > 10 ) {
+      //$pages = $itemModel->getTotalItems()[0]->total / 10;
+      $pages = intval($count / 10);
+
+    //}
     $pagination = $this->generateView( 'pagination', array('pages' => $pages) );
     foreach( $items as $item ) {
       $result .= $this->build( $item );
@@ -25,18 +32,37 @@ class ItemController extends Controller{
     return $result . $pagination;
   }
 
-
   public function filtro( $atts = null ) {
     $itemModel = new Item();
     $colecoes = $itemModel->getColecao();
-    return $this->generateView('filtro', array('colecoes' => $colecoes));
+    $page = get_queried_object();
+    $page = get_page_link( $page->ID );
+    return $this->generateView('filtro', array('colecoes' => $colecoes, 'page' => $page));
   }
 
   public function build( $item ) {
     $livro = get_page_by_title('Livro');
     $link = get_page_link( $livro->ID );
     $itemModel = new Item();
-    return $this->generateView( 'items', array('link' => $link, 'item' => $item, 'thumbnail' => $itemModel->getUploadImage( $item )) );
+    $userId = get_current_user_id();
+    $favorito = get_posts(
+      array(
+         'numberposts'	=> -1,
+         'post_status' => 'private',
+         'post_type'		=> 'favorito',
+         'meta_key'		=> 'item_id',
+         'meta_value'	=> $item->id
+      )
+    );
+    return $this->generateView( 'items',
+      array(
+        'link' => $link,
+        'item' => $item,
+        'thumbnail' => $itemModel->getUploadImage( $item ),
+        'favorito' => $favorito,
+        'userId' => $userId
+      )
+    );
   }
 
   public function view() {

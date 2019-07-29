@@ -82,14 +82,16 @@
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       </ul>
       <p class="post-content">
-        <?php if( count( $favorito ) > 0 ): ?>
-          <button type="button" id="desfavoritar" favorito="<?php echo e($favorito[0]->ID); ?>" class="btn btn-primary">
-            <i class="fa fa-star"></i> Remover de favorito
-          </button>
-        <?php else: ?>
-          <button type="button" id="favoritar" item="<?php echo e($item->id); ?>" user="<?php echo e($userId); ?>" class="btn btn-primary">
-            <i class="fa fa-star"></i> Favoritar
-          </button>
+        <?php if( get_current_user_id() > 0 ): ?>
+          <?php if( count( $favorito ) > 0 ): ?>
+            <button type="button" favorito="<?php echo e($favorito[0]->ID); ?>" class="btn btn-primary desfavoritar">
+              <i class="fa fa-star"></i> Remover de favorito
+            </button>
+          <?php else: ?>
+            <button type="button" item="<?php echo e($item->id); ?>" user="<?php echo e($userId); ?>" class="btn btn-primary favoritar">
+              <i class="fa fa-star"></i> Favoritar
+            </button>
+          <?php endif; ?>
         <?php endif; ?>
       </p>
       <div class="accordion" id="artist-accordion">

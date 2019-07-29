@@ -3,26 +3,41 @@ namespace App\Model;
 
 class Item {
 
-    private $host= 'memoriafredericomorais.com.br';
-    //private $host= 'localhost/AppGini';
+    //private $host= 'memoriafredericomorais.com.br';
+    private $host= 'localhost/AppGini';
+    private $except_args = ['l', 'r'];
 
-<<<<<<< HEAD
     public function getHost() {
       return $this->host;
     }
 
-    public function getItems($page = false, array $args) {
+    public function queryBuilder( array $args ) {
+      $query = '';
+      foreach( $args as $parameter => $value ) {
+        if( !in_array( $parameter, $this->except_args ) ) {
+          //if( !$query) ) {
+            /*$query = "?{$parameter}={$value}";
+          } else { */
+            $query .= "&{$parameter}={$value}";
+          //}
+        }
+      }
+      return str_replace(' ', '%20', $query);
+    }
+
+    public function getItems( $page = false, array $args = array() ) {
       $result = '';
+      $query = $this->queryBuilder($args);
       if( $page ) {
-        $result = json_decode( file_get_contents('http://'. $this->host .'/api/item.php?t=123&page='.$page.'&rows=10') );
+        $result = json_decode( file_get_contents('http://'. $this->host .'/api/item.php?t=123&page='.$page.'&rows=10' . $query ) );
       } else {
-        $result = json_decode( file_get_contents('http://'. $this->host .'/api/item.php?t=123') );
+        $result = json_decode( file_get_contents('http://'. $this->host .'/api/item.php?t=123' . $query ) );
       }
       return $result;
     }
 
     public function getItem($id) {
-      $result = json_decode( file_get_contents('http://'. $this->host .'/api/item.php?t=123&itemId='.$id) );
+      $result = json_decode( file_get_contents('http://'. $this->host .'/api/item.php?t=123&itemId='.$id) )->result;
       return $result;
     }
 

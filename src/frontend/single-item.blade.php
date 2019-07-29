@@ -81,14 +81,16 @@
         @endforeach
       </ul>
       <p class="post-content">
-        @if( count( $favorito ) > 0 )
-          <button type="button" id="desfavoritar" favorito="{{ $favorito[0]->ID }}" class="btn btn-primary">
-            <i class="fa fa-star"></i> Remover de favorito
-          </button>
-        @else
-          <button type="button" id="favoritar" item="{{ $item->id }}" user="{{ $userId }}" class="btn btn-primary">
-            <i class="fa fa-star"></i> Favoritar
-          </button>
+        @if( get_current_user_id() > 0 )
+          @if( count( $favorito ) > 0 )
+            <button type="button" favorito="{{ $favorito[0]->ID }}" class="btn btn-primary desfavoritar">
+              <i class="fa fa-star"></i> Remover de favorito
+            </button>
+          @else
+            <button type="button" item="{{ $item->id }}" user="{{ $userId }}" class="btn btn-primary favoritar">
+              <i class="fa fa-star"></i> Favoritar
+            </button>
+          @endif
         @endif
       </p>
       <div class="accordion" id="artist-accordion">

@@ -1,11 +1,11 @@
 <h3>Encontre itens do acervo através de busca.</h3>
-<form>
+<form action="{{ $page }}">
   <div class="row">
     <div class="col-md-3">
-      <input type="text" class="form-control" placeholder="Digite o nome ou código do item" name="search">
+      <input type="text" class="form-control" placeholder="Digite o nome ou código do item" name="titulo">
     </div>
     <div class="col-md-3">
-      <select class="form-control" name="colecao" id="colecao">
+      <select class="form-control" name="colecaoId" id="colecao">
         <option value="">Selecione a coleção...</option>
         @foreach( $colecoes as $colecao )
           <option value="{{ $colecao->id }}">{{ $colecao->colecao }}</option>
@@ -13,12 +13,12 @@
       </select>
     </div>
     <div class="col-md-3">
-      <select class="form-control" name="grupo" id="grupo">
+      <select class="form-control" name="grupoId" id="grupo">
         <option value="">Selecione a grupo...</option>
       </select>
     </div>
     <div class="col-md-3">
-      <select class="form-control" name="serie" id="serie">
+      <select class="form-control" name="serieId" id="serie">
         <option value="">Selecione a série...</option>
       </select>
     </div>

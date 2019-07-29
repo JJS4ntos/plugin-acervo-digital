@@ -39,5 +39,5 @@ function super_dashboard_page_setup(){
 }
 
 function page_resource(){
-  echo file_get_contents( SD_PATH . 'frontend/index.php' );
+  include( SD_PLUGIN_PATH . 'src/frontend/index.blade.php' );
 }
