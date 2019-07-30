@@ -5,7 +5,7 @@
       <input type="text" class="form-control" placeholder="Digite o nome ou código do item" name="titulo">
     </div>
     <div class="col-md-3">
-      <select class="form-control" name="colecaoId" id="colecao">
+      <select class="form-control" name="colecaoId">
         <option value="">Selecione a coleção...</option>
         @foreach( $colecoes as $colecao )
           <option value="{{ $colecao->id }}">{{ $colecao->colecao }}</option>
@@ -13,13 +13,17 @@
       </select>
     </div>
     <div class="col-md-3">
-      <select class="form-control" name="grupoId" id="grupo">
-        <option value="">Selecione a grupo...</option>
+      <select class="form-control" name="grupoId">
+        @foreach( $grupos as $grupo )
+          <option value="{{ $grupo->id }}">{{ $grupo->grupo }}</option>
+        @endforeach
       </select>
     </div>
     <div class="col-md-3">
-      <select class="form-control" name="serieId" id="serie">
-        <option value="">Selecione a série...</option>
+      <select class="form-control" name="serieId">
+        @foreach( $series as $serie )
+          <option value="{{ $serie->id }}">{{ $serie->serie }}</option>
+        @endforeach
       </select>
     </div>
   </div>

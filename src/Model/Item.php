@@ -56,8 +56,23 @@ class Item {
       return $result;
     }
 
-    public function getGrupo($id) {
-      $result = json_decode( file_get_contents('http://'. $this->host .'/api/group.php?t=123&groupId='. $id .'&page=1&rows=1000') );
+    public function getGrupo($id = false) {
+      $result = '';
+      if($id) {
+        $result = json_decode( file_get_contents('http://'. $this->host .'/api/group.php?t=123&groupId='. $id .'&page=1&rows=1000') );
+      } else {
+        $result = json_decode( file_get_contents('http://'. $this->host .'/api/group.php?t=123&page=1&rows=1000') );
+      }
+      return $result;
+    }
+
+    public function getSerie($id = false) {
+      $result = '';
+      if($id) {
+        $result = json_decode( file_get_contents('http://'. $this->host .'/api/serie.php?t=123&serieId='. $id .'&page=1&rows=1000') );
+      } else {
+        $result = json_decode( file_get_contents('http://'. $this->host .'/api/serie.php?t=123&page=1&rows=1000') );
+      }
       return $result;
     }
 

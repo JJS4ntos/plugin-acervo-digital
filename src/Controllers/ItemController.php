@@ -35,13 +35,15 @@ class ItemController extends Controller{
   public function filtro( $atts = null ) {
     $itemModel = new Item();
     $colecoes = $itemModel->getColecao();
+    $grupos = $itemModel->getGrupo();
+    $series = $itemModel->getSerie();
     $page = get_queried_object();
     $page = get_page_link( $page->ID );
-    return $this->generateView('filtro', array('colecoes' => $colecoes, 'page' => $page));
+    return $this->generateView('filtro', array('colecoes' => $colecoes, 'grupos' => $grupos, 'series' => $series, 'page' => $page));
   }
 
   public function build( $item ) {
-    $livro = get_page_by_title('Livro');
+    $livro = get_page_by_title('Item');
     $link = get_page_link( $livro->ID );
     $itemModel = new Item();
     $userId = get_current_user_id();

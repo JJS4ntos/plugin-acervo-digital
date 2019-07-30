@@ -18,9 +18,6 @@
       </div>
       <ul>
         <li>Dimensão: {{ $item->dimensao }}</li>
-        <li>Coleção: {{ $item->colecao }}</li>
-        <li>Grupo: {{ $item->grupo }}</li>
-        <li>Série: {{ $item->serie }}</li>
       </ul>
       <p class='text-muted'>{{$item->descricao}}</p>
       <div class="post-actions">

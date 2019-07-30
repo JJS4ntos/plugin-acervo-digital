@@ -18,9 +18,6 @@
       </div>
       <ul>
         <li>Dimensão: <?php echo e($item->dimensao); ?></li>
-        <li>Coleção: <?php echo e($item->colecao); ?></li>
-        <li>Grupo: <?php echo e($item->grupo); ?></li>
-        <li>Série: <?php echo e($item->serie); ?></li>
       </ul>
       <p class='text-muted'><?php echo e($item->descricao); ?></p>
       <div class="post-actions">
