@@ -110,7 +110,7 @@ class Item {
     }
 
     public function getRelationItems( $item ){
-      $result = json_decode( file_get_contents('http://'. $this->host .'/api/item.php?t=123&serieId=' . $item->serie_codigo . '&page=1&rows=4') );
+      $result = json_decode( file_get_contents('http://'. $this->host .'/api/item.php?t=123&serieId=' . $item->serie_codigo . '&page=1&rows=4') )->result;
       return $result;
     }
 
