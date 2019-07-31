@@ -56,11 +56,17 @@ class ItemController extends Controller{
          'meta_value'	=> $item->id
       )
     );
+    $thumbnail = '';
+    if( $item->publicar ) {
+      $thumbnail = $itemModel->getUploadImage( $item );
+    } else {
+      $thumbnail = $itemModel->getUploadImage( $item, true );
+    }
     return $this->generateView( 'items',
       array(
         'link' => $link,
         'item' => $item,
-        'thumbnail' => $itemModel->getUploadImage( $item ),
+        'thumbnail' => $thumbnail,
         'favorito' => $favorito,
         'userId' => $userId
       )
@@ -90,7 +96,12 @@ class ItemController extends Controller{
             $links[] = $link;
           }
         }
-        $images = $itemModel->getUploadImages($item);
+        $images = [];
+        if( $item->publicar ) {
+          $images = $itemModel->getUploadImages($item);
+        } else {
+          $images = array('http://memoriafredericomorais.com.br/acervo/wp-content/uploads/2019/07/placeholder-600x400.png');
+        }
         $favorito = get_posts(
           array(
              'numberposts'	=> -1,

@@ -14,6 +14,25 @@
 @endphp
 <script type="text/javascript">
   root = '{{ get_bloginfo('url') }}';
+  $('#solicitar-acesso').click(function(){
+    $.ajax({
+      url: '{{ $url }}' + '/wp-json/acervo-api/solicitar-acesso',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        itemId: '{{ $_GET['id'] }}',
+        userId: {{ get_current_user_id() }}
+      },
+      beforeSend: function( jqXHR, settings ) {
+        $('#solicitar-acesso').html('Solicitando...');
+      },
+      complete: function() {
+        alert('Solicitação enviada com sucesso! Aguarde a aprovação do administrador, você receberá um e-mail quando isto acontecer.');
+        $('#solicitar-acesso').html('Acesso solicitado');
+        $('#solicitar-acesso').attr('disabled', 'true');
+      }
+    });
+  });
 </script>
 <div class="container">
   <div class="row">
@@ -29,7 +48,11 @@
             <ul class="slides">
               <li class="format-image" style="display: list-item;">
                 <a href="{{ $itemModel->getUploadImage($item) }}" class="magnific-gallery-image media-box">
-                  <img src="{{ $itemModel->getUploadImage($item) }}" alt="Artwork">
+                  @if( $item->publicar )
+                    <img src="{{ $itemModel->getUploadImage($item) }}" alt="Artwork">
+                  @else
+                    <img src="{{ $itemModel->getUploadImage($item, true) }}" alt="Artwork">
+                  @endif
                   <span class="zoom"><span class="icon"><i class="icon-expand"></i></span></span>
                   <span class="zoom">
                     <span class="icon"><i class="fa fa-arrow-right"></i></span>
@@ -91,6 +114,9 @@
               <i class="fa fa-star"></i> Favoritar
             </button>
           @endif
+          <button type="button" id="solicitar-acesso" class="btn btn-primary">
+            Solicitar acesso
+          </button>
         @endif
       </p>
       <div class="accordion" id="artist-accordion">
