@@ -3,8 +3,8 @@ namespace App\Model;
 
 class Item {
 
-    private $host= 'memoriafredericomorais.com.br';
-    //private $host= 'localhost/AppGini';
+    //private $host= 'memoriafredericomorais.com.br';
+    public $host = '45.76.12.210';
     private $except_args = ['l', 'r'];
 
     public function getHost() {
@@ -81,17 +81,17 @@ class Item {
       if( isset($item->uploads) ) {
         $uploads = json_decode( $item->uploads )->images;
       }
-      $image = 'http://memoriafredericomorais.com.br/acervo/wp-content/uploads/2019/07/placeholder-600x400.png';
+      $image = 'http://'. $this->host .'/acervo/wp-content/uploads/2019/07/placeholder-600x400.png';
       if( $force_placeholder ) {
           return $image;
       }
       if(is_array($uploads)) {
         foreach ($uploads as $key => $upload) {
           if($key == 0) {
-            $image = 'http://acervofredericomorais.com.br/arquivos/images/th/'. str_replace('.pdf', '_th.jpg', $upload->fileName);
+            $image = 'http://'. $this->host .'/arquivos/images/th/'. str_replace('.pdf', '_th.jpg', $upload->fileName);
           }
           if($upload->defaultImage) {
-            $image = 'http://acervofredericomorais.com.br/arquivos/images/th/'. str_replace('.pdf', '_th.jpg', $upload->fileName);
+            $image = 'http://'. $this->host .'/arquivos/images/th/'. str_replace('.pdf', '_th.jpg', $upload->fileName);
           }
         }
       }
@@ -100,7 +100,7 @@ class Item {
 
     public function getUploadImages( $item, $force_placeholder = false ) {
       if( $force_placeholder ) {
-        return array('http://memoriafredericomorais.com.br/acervo/wp-content/uploads/2019/07/placeholder-600x400.png');
+        return array('http://'. $this->host .'/acervo/wp-content/uploads/2019/07/placeholder-600x400.png');
       }
       $uploads = '';
       if( isset($item->uploads) ) {
@@ -109,7 +109,7 @@ class Item {
       $images = array();
       if( is_array($uploads) ) {
         foreach ($uploads as $upload) {
-          $images[] = 'http://acervofredericomorais.com.br/arquivos/images/th/'. str_replace('.pdf', '_th.jpg', $upload->fileName);
+          $images[] = 'http://'. $this->host .'/arquivos/images/th/'. str_replace('.pdf', '_th.jpg', $upload->fileName);
         }
       }
       return $images;

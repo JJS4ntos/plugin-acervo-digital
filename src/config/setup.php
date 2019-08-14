@@ -20,7 +20,6 @@ function register_assets(){
   }
 }
 
-
 //Set te base url to access endpoints
 define('URL_SCOPE', 'acervo-api');
 

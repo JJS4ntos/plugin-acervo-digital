@@ -12,27 +12,34 @@
   );
   $url = get_bloginfo('url');
 ?>
-<script type="text/javascript">
+<script type="text/javascript" defer>
   root = '<?php echo e(get_bloginfo('url')); ?>';
+  $(document).ready(function(){
+    var el = document.getElementById("telefone");
+    VMasker(el).maskPattern("(99) 9999-9999");
+  });
   $('#solicitar-acesso').click(function(){
-    $.ajax({
-      url: '<?php echo e($url); ?>' + '/wp-json/acervo-api/solicitar-acesso',
-      type: 'POST',
-      dataType: 'json',
-      data: {
-        itemId: '<?php echo e($_GET['id']); ?>',
-        userId: <?php echo e(get_current_user_id()); ?>
-
-      },
-      beforeSend: function( jqXHR, settings ) {
-        $('#solicitar-acesso').html('Solicitando...');
-      },
-      complete: function() {
-        alert('Solicitação enviada com sucesso! Aguarde a aprovação do administrador, você receberá um e-mail quando isto acontecer.');
-        $('#solicitar-acesso').html('Acesso solicitado');
-        $('#solicitar-acesso').attr('disabled', 'true');
-      }
-    });
+    if( $('#telefone').val() !== '' && $('#telefone').val() !== '' ) {
+      $.ajax({
+        url: '<?php echo e($url); ?>' + '/wp-json/acervo-api/solicitar-acesso',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          itemId: '<?php echo e($_GET['id']); ?>',
+          userId: <?php echo e(get_current_user_id()); ?>,
+          telefone: $('#telefone').val(),
+          justificativa: $('#justificativa').val()
+        },
+        beforeSend: function( jqXHR, settings ) {
+          $('#solicitar-acesso').html('Solicitando...');
+        },
+        complete: function() {
+          alert('Solicitação enviada com sucesso! Aguarde a aprovação do administrador, você receberá um e-mail quando isto acontecer.');
+          $('#solicitar-acesso').html('Acesso solicitado');
+          $('#solicitar-acesso').attr('disabled', 'true');
+        }
+      });
+    }
   });
 </script>
 <div class="container">
@@ -116,7 +123,7 @@
               <i class="fa fa-star"></i> Favoritar
             </button>
           <?php endif; ?>
-          <button type="button" id="solicitar-acesso" class="btn btn-primary">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAcesso">
             Solicitar acesso
           </button>
         <?php endif; ?>
@@ -143,6 +150,34 @@
                   </div>
               </div>
           </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalAcesso" tabindex="-1" role="dialog" aria-labelledby="modalAcesso" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAcessoTitle">Formulário de solicitação de acesso</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="justificativa">Justificativa:</label>
+          <input class="form-control" type="text" name="justificativa" id="justificativa" placeholder="Informe a justificativa" required>
+        </div>
+        <div class="form-group">
+          <label for="telefone">Telefone:</label>
+          <input class="form-control" type="text" name="telefone" id="telefone" placeholder="Digite o seu telefone" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="solicitar-acesso" class="btn btn-primary">
+          Solicitar acesso
+        </button>
       </div>
     </div>
   </div>

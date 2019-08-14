@@ -27,6 +27,8 @@ class SolicitacaoController {
 
     update_field('identificacao_item', $item->identificacao, $post_id);
     update_field('usuario', $_POST['userId'], $post_id);
+    update_field('telefone', $_POST['telefone'], $post_id);
+    update_field('justificativa', $_POST['justificativa'], $post_id);
     update_field('aprovado', false, $post_id);
 
     $email = get_option('admin_email');
@@ -36,10 +38,10 @@ class SolicitacaoController {
     return 'Solicitado com sucesso!';
   }
 
-
   public function solicitarDownload() {
+    $item = new Item();
     $identificacao = base64_decode($_POST['item']);
-    $result = json_decode( file_get_contents('http://localhost/AppGini/api/item.php?t=123&identificacao=' . $identificacao) )[0];
+    $result = json_decode( file_get_contents('http://'. $item->getHost() .'/api/item.php?t=123&identificacao=' . $identificacao) )[0];
     $uploads = json_decode($result->uploads);
     $uploads = $uploads->images;
     if( !isset($_POST['userId']) ) {

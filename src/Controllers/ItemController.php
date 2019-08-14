@@ -87,7 +87,7 @@ class ItemController extends Controller{
         $links = array();
         if( $uploads ) {
           foreach( $uploads as $upload ) {
-            $link = 'http://acervofredericomorais.com.br/arquivos/images/upload/'. $upload->fileName;
+            $link = 'http://'. $itemModel->getHost() .'/arquivos/images/upload/'. $upload->fileName;
             /*header('Content-Type: application/pdf');
             header("Content-Disposition: attachment; filename={$upload->fileName}.pdf");
             header('Pragma: no-cache');
@@ -100,7 +100,7 @@ class ItemController extends Controller{
         if( $item->publicar ) {
           $images = $itemModel->getUploadImages($item);
         } else {
-          $images = array('http://memoriafredericomorais.com.br/acervo/wp-content/uploads/2019/07/placeholder-600x400.png');
+          $images = array('http://'. $itemModel->getHost() .'/acervo/wp-content/uploads/2019/07/placeholder-600x400.png');
         }
         $favorito = get_posts(
           array(
