@@ -176,41 +176,23 @@
     </div>
   </div>
 </div>
-@if( !empty($markedFiles) )
-  <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog-acervo modal-xl">
-      <div class="modal-content-acervo">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalAcessoTitle">{{ $item->titulo }}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="http://{{ $markedFiles[0] }}" frameborder="0" scrolling="no"></iframe>
-          </div> 
-        </div>
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog-acervo modal-xl">
+    <div class="modal-content-acervo">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalArquivoTitle">{{ $item->titulo }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="http://{{ $markedFiles[0] }}" frameborder="0" scrolling="no"></iframe>
+        </div> 
       </div>
     </div>
   </div>
-@else
-  <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalAcessoTitle">{{ $item->titulo }}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h2 class="text-white">Documento não disponivel</h2>
-        </div>
-      </div>
-    </div>
-  </div>
-@endif
+</div>
 <!-- Modal -->
 <div class="modal fade" id="modalAcesso" tabindex="-1" role="dialog" aria-labelledby="modalAcesso" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
