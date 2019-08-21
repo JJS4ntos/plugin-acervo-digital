@@ -32,9 +32,6 @@
 }
 </style>
 <script type="text/javascript" defer>
-  function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-  }
 
   root = '{{ get_bloginfo('url') }}';
   
@@ -190,8 +187,7 @@
       </div>
       <div class="modal-body">
         <div class="embed-responsive embed-responsive-16by9">
-          <!--<iframe class="embed-responsive-item" src="http://{{ $markedFiles[0] }}" frameborder="0"></iframe>-->
-          <iframe class="embed-responsive-item" src="http://45.76.12.210/arquivos/images/publico_marca/BRFM_AM_18_0003_da_pubmd.pdf" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+          <iframe class="embed-responsive-item" src="http://{{ $markedFiles[0] }}" frameborder="0" scrolling="no"></iframe>
         </div> 
       </div>
     </div>

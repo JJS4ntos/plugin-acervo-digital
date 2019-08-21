@@ -33,7 +33,7 @@
 </style>
 <script type="text/javascript" defer>
   function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    //obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
   }
 
   root = '<?php echo e(get_bloginfo('url')); ?>';
