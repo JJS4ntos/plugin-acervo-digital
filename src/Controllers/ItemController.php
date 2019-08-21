@@ -111,13 +111,15 @@ class ItemController extends Controller{
              'meta_value'	=> $_GET['id']
           )
         );
+        $markedFiles = $itemModel->getFileMarked($item);
         return $this->generateView('single-item', array(
             'item' => $item,
             'images' => $images,
             'itemModel' => $itemModel,
             'userId' => get_current_user_id(),
             'favorito' => $favorito,
-            'links' => $links
+            'links' => $links,
+            'markedFiles' => $markedFiles
           )
         );
     }

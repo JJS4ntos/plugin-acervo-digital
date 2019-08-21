@@ -98,6 +98,21 @@ class Item {
       return $image;
     }
 
+    public function getFileMarked($item){
+      $prefix = '/arquivos/images/publico_marca/';
+      $uploads = [];
+      if( isset($item->uploads) ) {
+        if( !empty($item->uploads) ) {
+          $ups = json_decode($item->uploads);
+          foreach( $ups as $upload ) {
+            $fileName = explode('_', $upload[0]->name)[0] . '_da_pubmd.pdf';
+            $uploads[] = $this->host . $prefix . $fileName;
+          }
+        }
+      }
+      return $uploads;
+    }
+
     public function getUploadImages( $item, $force_placeholder = false ) {
       if( $force_placeholder ) {
         return array('http://'. $this->host .'/acervo/wp-content/uploads/2019/07/placeholder-600x400.png');
