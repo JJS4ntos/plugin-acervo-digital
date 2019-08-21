@@ -187,7 +187,11 @@
       </div>
       <div class="modal-body">
         <div class="embed-responsive embed-responsive-16by9">
+        @if( count($markedFiles) > 0 )
           <iframe class="embed-responsive-item" src="http://{{ $markedFiles[0] }}" frameborder="0" scrolling="no"></iframe>
+        @else
+          <h2 class="text-white">Este documento não está disponivel.</h2>
+        @endif
         </div> 
       </div>
     </div>
