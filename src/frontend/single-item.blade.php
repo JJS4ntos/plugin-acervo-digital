@@ -1,4 +1,5 @@
 @php
+  $redirect = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
   $properties = array(
     'Descrição' => 'descricao',
     'Identificador' => 'identificacao',
@@ -31,15 +32,15 @@
   border-radius: 0;
 }
 </style>
-<script type="text/javascript" defer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
 
   root = '{{ get_bloginfo('url') }}';
   
   $(document).ready(function(){
     var el = document.getElementById("telefone");
     VMasker(el).maskPattern("(99) 9999-9999");
-  });
-  $('#solicitar-acesso').click(function(){
+    $('#solicitar-acesso').click(function(){
     if( $('#telefone').val() !== '' && $('#telefone').val() !== '' ) {
       $.ajax({
         url: '{{ $url }}' + '/wp-json/acervo-api/solicitar-acesso',
@@ -64,6 +65,7 @@
       alert('Preencha todos os campos para realizar uma solicitação');
     }
   });
+ });
 </script>
 <div class="container">
   <div class="row">
@@ -145,10 +147,20 @@
               <i class="fa fa-star"></i> Favoritar
             </button>
           @endif
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAcesso">
+        @endif
+	@if( get_current_user_id() > 0 )
+	  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAcesso">
             Solicitar acesso
           </button>
-        @endif
+	@else
+	  <p>Você precisa estar logado para realizar uma solicitação de acesso a este documento.</p>
+	  <form method="post" action="{{ $url }}/wp-json/acervo-api/solicitar-login">
+		<input type="hidden" name="redirect" value="{{ $redirect }}">
+		<button type="submit" class="btn btn-primary">
+			Fazer login
+		</button>
+	  </form>
+	@endif
       </p>
       <div class="accordion" id="artist-accordion">
           <div class="accordion-group panel">

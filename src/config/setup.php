@@ -23,6 +23,16 @@ function register_assets(){
 //Set te base url to access endpoints
 define('URL_SCOPE', 'acervo-api');
 
+add_filter( 'clean_url', function( $url )
+{
+    if ( strpos($url, 'main.js') === FALSE )
+    { // not our file
+        return $url;
+    }
+    // Must be a ', not "!
+    return "$url' defer='defer";
+}, 11, 1 );
+
 //Register scripts on admin_panel
 add_action('admin_enqueue_scripts', function(){
   //wp_enqueue_script( URL_SCOPE, 'script_url' );

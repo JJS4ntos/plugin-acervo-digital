@@ -18,9 +18,9 @@ class SolicitacaoController {
     }
 
     $user = get_user_by( 'ID', $_POST['userId'] );
-
+    $titulo = !empty($item->titulo)? $item->titulo : '(Sem título)['.$item->identificacao.']';
     $post_id = wp_insert_post([
-      'post_title' => 'Solicitação do item "' . $item->titulo . '" por ' . $user->user_email,
+      'post_title' => 'Solicitação do item "' . $titulo . '" por ' . $user->user_email,
       'post_type' => 'solicitacao',
       'post_status' => 'private'
     ]);
@@ -75,6 +75,14 @@ class SolicitacaoController {
           }
         }
       }
+    }
+  }
+
+  public function solicitarLogin() {
+    if (!is_user_logged_in() && isset($_POST) ) {
+      $redirect = $_POST['redirect'];
+      wp_redirect( wp_login_url( $redirect ) );
+      exit();
     }
   }
 

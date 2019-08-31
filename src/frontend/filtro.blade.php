@@ -14,13 +14,15 @@
     </div>
     <div class="col-md-3">
       <select class="form-control" name="grupoId">
-        @foreach( $grupos as $grupo )
+        <option value="">Selecione o grupo...</option>
+	@foreach( $grupos as $grupo )
           <option value="{{ $grupo->id }}">{{ $grupo->grupo }}</option>
         @endforeach
       </select>
     </div>
     <div class="col-md-3">
       <select class="form-control" name="serieId">
+	<option value="">Selecione a série...</option>
         @foreach( $series as $serie )
           <option value="{{ $serie->id }}">{{ $serie->serie }}</option>
         @endforeach
