@@ -41,7 +41,7 @@ class SolicitacaoController {
   public function solicitarDownload() {
     $item = new Item();
     $identificacao = base64_decode($_POST['item']);
-    $result = json_decode( file_get_contents('http://'. $item->getHost() .'/api/item.php?t=123&identificacao=' . $identificacao) )[0];
+    $result = json_decode( file_get_contents('http://'. $item->getHost() .'/api/item.php?t=123&identificacao=' . $identificacao) )->result[0];
     $uploads = json_decode($result->uploads);
     $uploads = $uploads->images;
     if( !isset($_POST['userId']) ) {
@@ -65,10 +65,11 @@ class SolicitacaoController {
         if( $aprovado ) {
           if( $uploads ) {
             foreach( $uploads as $upload ) {
-              $link = 'http://acervofredericomorais.com.br/arquivos/images/upload/'. $upload->fileName;
+              $link = 'http://45.76.12.210/arquivos/images/upload/'. $upload->fileName;
               header('Content-Type: application/pdf');
-              header("Content-Disposition: attachment; filename={$upload->fileName}.pdf");
+              header("Content-Disposition: attachment; filename={$upload->fileName}");
               header('Pragma: no-cache');
+              //var_dump($link);
               readfile($link);
               exit;
             }
